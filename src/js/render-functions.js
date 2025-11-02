@@ -1,27 +1,37 @@
 // Описаний у документації
-import SimpleLightbox from "simplelightbox";
+import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
-import "simplelightbox/dist/simple-lightbox.min.css";
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-let modal=new SimpleLightbox(".gallery a");
+let modal = new SimpleLightbox('.gallery a');
 
-const loaderEl=document.querySelector(".loader");
-const galleryEl=document.querySelector(".gallery");
+const loaderEl = document.querySelector('.loader');
+const galleryEl = document.querySelector('.gallery');
+const btnEl = document.querySelector('.load-more-btn');
 
-function showLoader(){
-    loaderEl.classList.remove("ishidden");
-};
+function showLoader() {
+  loaderEl.classList.remove('ishidden');
+}
 
-function hideLoader(){
-     loaderEl.classList.add("ishidden");
-};
+function hideLoader() {
+  loaderEl.classList.add('ishidden');
+}
 
-function createGallery(images){
-    const murkup=images.map(
-        ({ previewURL, largeImageURL, tags, likes, views, comments, downloads }) => 
-            `<li class="gallery-item">
+function createGallery(images) {
+  const murkup = images
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) =>
+        `<li class="gallery-item">
                 <a class="gallery-link" href="${largeImageURL}">
-                    <img class="gallery-image" src="${previewURL}" alt="${tags}" />
+                    <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
                     <div class="info">
                         <p><b>Likes:</b> ${likes}</p>
                         <p><b>Views:</b> ${views}</p>
@@ -29,14 +39,32 @@ function createGallery(images){
                         <p><b>Downloads:</b> ${downloads}</p>
                     </div>
                 </a>
-            </li>`)
-    .join("");
-    galleryEl.insertAdjacentHTML("beforeend", murkup);
-    modal.refresh();
-};
+            </li>`
+    )
+    .join('');
+  galleryEl.insertAdjacentHTML('beforeend', murkup);
+  modal.refresh();
+}
 
-function clearGallery(){
-    galleryEl.innerHTML="";
-};
+function clearGallery() {
+  galleryEl.innerHTML = '';
+}
 
-export {showLoader, hideLoader, createGallery, clearGallery};
+function showLoadMoreButton() {
+  btnEl.classList.remove('ishidden');
+}
+
+function hideLoadMoreButton() {
+  btnEl.classList.add('ishidden');
+}
+
+export {
+  showLoader,
+  hideLoader,
+  createGallery,
+  clearGallery,
+  showLoadMoreButton,
+  hideLoadMoreButton,
+  btnEl,
+  galleryEl,
+};
