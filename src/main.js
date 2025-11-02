@@ -40,7 +40,7 @@ async function onSubmit(ev) {
   curretPage = 1;
 
   try {
-    const data = await getImagesByQuery(searchQuery);
+    const data = await getImagesByQuery(searchQuery, curretPage);
     if (data.hits.length === 0) {
       return iziToast.error({
         message:
@@ -70,7 +70,7 @@ async function onLoadMore() {
   curretPage += 1;
   showLoader();
   try {
-    const data = await getImagesByQuery(searchQuery);
+    const data = await getImagesByQuery(searchQuery, curretPage);
     if (totalPage === curretPage) {
       hideLoadMoreButton();
       iziToast.info({

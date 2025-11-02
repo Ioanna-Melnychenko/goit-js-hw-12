@@ -3,7 +3,10 @@ import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-let modal = new SimpleLightbox('.gallery a');
+const ligthbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 400,
+});
 
 const loaderEl = document.querySelector('.loader');
 const galleryEl = document.querySelector('.gallery');
@@ -43,7 +46,7 @@ function createGallery(images) {
     )
     .join('');
   galleryEl.insertAdjacentHTML('beforeend', murkup);
-  modal.refresh();
+  ligthbox.refresh();
 }
 
 function clearGallery() {

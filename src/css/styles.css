@@ -16,6 +16,7 @@
         width: 48px;
         height: 48px;
         color: green;
+        margin: 0 auto;
       }
         .loader:before,
         .loader:after {
@@ -95,6 +96,11 @@
     margin: 0 auto;
     margin-bottom: 32px;
 }
+
+.gallery-item {
+ border: 1px solid #000;
+}
+
 .gallery-image {
     width: 360px;
     height: 200px;
@@ -130,6 +136,10 @@ p {
     margin-bottom: 20px;
 }
 
+.load-more-btn:hover {
+  background: #6c8cff;
+}
+
 .form-btn {
     border-radius: 8px;
     padding: 8px 16px;
@@ -140,9 +150,27 @@ p {
     border: none;
 }
 
+.form-btn:hover {
+  background: #6c8cff;
+}
+
 .search-input {
   width: 272px;
   height: 34px;
   border: 1px solid #808080;
   border-radius: 2px;
+  
 }
+
+.search-input:hover {
+  border: 1px solid #000;
+}
+
+.search-input:active {
+  border: 1px solid #4E75FF;
+}
+
+.search-input::placeholder {
+  padding-left: 6px;
+}
+
