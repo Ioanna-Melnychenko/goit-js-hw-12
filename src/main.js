@@ -50,12 +50,17 @@ async function onSubmit(ev) {
     }
     createGallery(data.hits);
 
-    const firstEl = galleryEl.firstElementChild.getBoundingClientRect().height;
-    smoothScroll(firstEl);
+    //const firstEl = galleryEl.firstElementChild.getBoundingClientRect().height;
+    //smoothScroll(firstEl);
 
     if (data.totalHits > 15) {
       showLoadMoreButton();
       totalPage = Math.ceil(data.totalHits / 15);
+    } else {
+      iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: 'topRight',
+      });
     }
 
     formEL.reset();
@@ -69,19 +74,22 @@ async function onSubmit(ev) {
 async function onLoadMore() {
   curretPage += 1;
   showLoader();
+  hideLoadMoreButton();
   try {
     const data = await getImagesByQuery(searchQuery, curretPage);
     if (totalPage === curretPage) {
-      hideLoadMoreButton();
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
         position: 'topRight',
       });
-    }
-    createGallery(data.hits);
+    } else {
+      createGallery(data.hits);
 
-    const firstEl = galleryEl.firstElementChild.getBoundingClientRect().height;
-    smoothScroll(firstEl);
+      const firstEl =
+        galleryEl.firstElementChild.getBoundingClientRect().height;
+      smoothScroll(firstEl);
+      showLoadMoreButton();
+    }
   } catch (error) {
     iziToast.error({ message: error.message, position: 'topRight' });
   } finally {
