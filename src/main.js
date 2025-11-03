@@ -77,17 +77,16 @@ async function onLoadMore() {
   hideLoadMoreButton();
   try {
     const data = await getImagesByQuery(searchQuery, curretPage);
+    createGallery(data.hits);
+
+    const firstEl = galleryEl.firstElementChild.getBoundingClientRect().height;
+    smoothScroll(firstEl);
     if (totalPage === curretPage) {
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
         position: 'topRight',
       });
     } else {
-      createGallery(data.hits);
-
-      const firstEl =
-        galleryEl.firstElementChild.getBoundingClientRect().height;
-      smoothScroll(firstEl);
       showLoadMoreButton();
     }
   } catch (error) {
