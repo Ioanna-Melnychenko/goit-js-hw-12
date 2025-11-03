@@ -77,6 +77,13 @@ async function onLoadMore() {
   hideLoadMoreButton();
   try {
     const data = await getImagesByQuery(searchQuery, curretPage);
+    if (data.hits.length === 0) {
+      return iziToast.error({
+        message:
+          'Sorry, there are no images matching your search query. Please try again!',
+        position: 'topRight',
+      });
+    }
     createGallery(data.hits);
 
     const firstEl = galleryEl.firstElementChild.getBoundingClientRect().height;
